@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Shrinker</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; min-height: 100vh; background: #f3f4f6; }
+        .nav { background: #fb7185; padding: 16px; display: flex; gap: 8px; }
+        .nav button { padding: 8px 24px; background: #f43f5e; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .nav button:hover { background: #e11d48; }
+        .container { max-width: 672px; margin: 40px auto; padding: 32px; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { font-size: 30px; text-align: center; margin-bottom: 24px; }
+        h2 { font-size: 20px; margin: 16px 0 8px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; }
+        input { width: 100%; padding: 8px 16px; border: 2px solid #d1d5db; border-radius: 4px; margin-bottom: 16px; }
+        .btn { padding: 8px 32px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background: #2563eb; }
+        .result { margin-top: 24px; padding: 16px; background: #f9fafb; border-radius: 4px; }
+        .hidden { display: none; }
+        ul, ol { margin-left: 32px; }
+        li { margin: 4px 0; }
+        p { margin: 16px 0; color: #374151; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('about')">About us</button>
+    </div>
+
+    <div id="home" class="container">
+        <h1>Link Shrinker</h1>
+        <div>
+            <label>Long URL:</label>
+            <input type="text" id="longUrl" placeholder="https://react.dev/learn/reusing-logic-with-custom-hooks">
+            
+            <label>Enter short code:</label>
+            <input type="text" id="shortCode" placeholder="react101">
+            
+            <div style="text-align: center;">
+                <button class="btn" onclick="shorten()">Shorten</button>
+            </div>
+            
+            <div id="result" class="result hidden">
+                <h2 style="font-weight: bold; margin-bottom: 8px;">Short URL</h2>
+                <a id="shortLink" href="#" target="_blank" style="color: #2563eb; text-decoration: underline; word-break: break-all;"></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="container hidden">
+        <h1>About Us</h1>
+        <p>Welcome to Link Shrinker, your solution for creating short, customizable URLs that are easy to share.</p>
+        
+        <h2>Features:</h2>
+        <ul>
+            <li>Convert long URLs into short links</li>
+            <li>Create custom short codes</li>
+            <li>Simple user interface</li>
+            <li>Fast link shortening</li>
+        </ul>
+        
+        <h2>How to Use:</h2>
+        <ol>
+            <li>Enter your long URL</li>
+            <li>Create a custom short code</li>
+            <li>Click Shorten button</li>
+            <li>Share your shortened link!</li>
+        </ol>
+    </div>
+
+    <script>
+        function showPage(page) {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('about').classList.add('hidden');
+            document.getElementById(page).classList.remove('hidden');
+        }
+
+        function shorten() {
+            const longUrl = document.getElementById('longUrl').value;
+            const shortCode = document.getElementById('shortCode').value;
+            
+            if (!longUrl || !shortCode) {
+                alert('Please fill in both fields');
+                return;
+            }
+            
+            const shortUrl = 'https://cpt405.co/' + shortCode;
+            document.getElementById('shortLink').href = longUrl;
+            document.getElementById('shortLink').textContent = shortUrl;
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
